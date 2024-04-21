@@ -1,8 +1,8 @@
-const express = require('express')
-const mongodb = require('mongodb')
+import express from 'express'
+import { MongoClient } from 'mongodb'
 
 const app = express()
-const client = new mongodb.MongoClient('mongodb://mongo:27017')
+const client = new MongoClient('mongodb://mongo:27017')
 
 app.get('/api/count', async (req, res) => {
   await client.connect()

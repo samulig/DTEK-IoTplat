@@ -10,6 +10,8 @@ COPY package*.json ./
 # Install your project's dependencies in the Docker container
 RUN npm install
 RUN npm install -g serve
+RUN npm install express
+RUN npm install mongodb
 
 # Copy the rest of your project's files to the Docker container
 COPY . .
