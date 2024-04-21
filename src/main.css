@@ -1,0 +1,17 @@
+h1 {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: rgb(13, 40, 61);
+    color: white
+}
+
+.monitor {
+    height: 100px;
+    width: 30%;
+    border: 2px solid white;
+    padding: 10px;
+    margin: 10px;
+}
