@@ -12,10 +12,7 @@ RUN npm install
 RUN npm install -g serve
 
 # Copy the rest of your project's files to the Docker container
-COPY public/ ./
-COPY src/ ./
-COPY index.html ./
-COPY vite.config.js ./
+COPY . .
 
 # Build your Vite application for production
 RUN npm run build
