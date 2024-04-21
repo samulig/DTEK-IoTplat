@@ -16,8 +16,10 @@ COPY . .
 
 # Build your Vite application for production
 RUN npm run build
+RUN chmod +x server.js
 
 EXPOSE 5000
 
 # Specify the command to start your application
-CMD [ "npm", "run", "serve" ]
+#CMD [ "npm", "run", "serve" ]
+CMD [ "./start.sh" ]
