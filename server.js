@@ -12,4 +12,8 @@ app.get('/api/count', async (req, res) => {
   res.json({ count })
 })
 
+app.get('/api/testing', async (req, res) => {
+  res.json({ message: 'Hello from the server!' })
+})
+
 app.listen(3100, () => console.log('Server is running on port 3100'))
