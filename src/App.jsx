@@ -11,6 +11,7 @@ function App() {
   <>
     <div>
       <h1>{title}</h1>
+      <h2>Hello.</h2>
     </div>
     <div>
       <Monitor />
