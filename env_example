@@ -1,3 +1,4 @@
 # Rename this file to .env and fill out the necessary variables.
 
 VITE_TITLE=Title!
+VITE_MONGO_URI=mongodb://mongo:example@mydb:27017

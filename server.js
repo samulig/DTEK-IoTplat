@@ -1,10 +1,12 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import { MongoClient } from 'mongodb'
 import cors from 'cors'
-//const cors = require('cors')
+
+dotenv.config()
 
 const app = express()
-const client = new MongoClient('mongodb://mongo:example@192.168.1.191:27017')
+const client = new MongoClient(process.env.VITE_MONGO_URI)
 
 app.use(cors({ origin: '*'}))
 
