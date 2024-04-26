@@ -3,29 +3,27 @@ import './main.css';
 
 let data = ""
 
-function Monitor() {
+function Monitor(props) {
   const [data, setData] = useState(null)
-  const [total, setTotal] = useState(0)
 
   useEffect(() => {
-    fetch('http://localhost:3100/api/testing')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error:', error));
-  }, [])
+    const fetchSensorData = () => {
+      fetch(`http://localhost:3100/api/sensors/temperature/${props.sensorId}`)
+        .then(response => response.json())
+        .then(data => setData(data))
+        .catch(error => console.error('Error:', error));
+    }
 
-  useEffect(() => {
-    fetch('http://localhost:3100/api/count')
-      .then(response => response.json())
-      .then(total => setTotal(total))
-      .catch(error => console.error('Error:', error));
+  fetchSensorData()
+  const intervalId = setInterval(fetchSensorData, 5000)
+  return () => clearInterval(intervalId)
   }, [])
 
   return (
     <div className='monitor'>
-      <p>Value: {JSON.stringify(data)}</p>
-      <br></br>
-      <p>Total amount of documents: {JSON.stringify(total)}</p>
+      <strong> Sensor ID: {data && data.sensorData && data.sensorData.metadata && data.sensorData.metadata.sensorId}</strong>
+      <p>Value: {data && data.sensorData && data.sensorData.temp}</p>
+      <p>Timestamp: {data && data.sensorData && data.sensorData.timestamp}</p>
     </div>
   )
 }
