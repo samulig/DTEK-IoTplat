@@ -3,15 +3,56 @@ h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    background-color: rgb(13, 40, 61);
-    color: white
+html, body {
+    background-color: rgb(41, 41, 41);
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .monitor {
-    height: 100px;
-    width: 30%;
-    border: 2px solid white;
+    height: 130px;
+    width: 90%;
+    border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
+    background-color: rgb(63, 63, 63);
+    box-shadow: 3px 3px 5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+}
+
+.app-container {
+    display: flex;
+    min-height: 100%;
+}
+
+.menu {
+    width: 15%;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: rgb(63, 63, 63);
+    text-align: center;
+}
+
+.menu-item {
+    padding: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    color: white;
+}
+
+.content {
+    width: 85%;
+    height: 100%;
+    overflow-y: auto;
+    margin-left: 30px;
+    margin-top: 60px;
 }

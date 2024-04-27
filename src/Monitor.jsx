@@ -23,6 +23,7 @@ function Monitor(props) {
     <div className='monitor'>
       <strong> Sensor ID: {data && data.sensorData && data.sensorData.metadata && data.sensorData.metadata.sensorId}</strong>
       <p>Value: {data && data.sensorData && data.sensorData.temp}</p>
+      <p>Sensor type: {data && data.sensorData && data.sensorData.metadata && data.sensorData.metadata.type}</p>
       <p>Timestamp: {data && data.sensorData && data.sensorData.timestamp}</p>
     </div>
   )

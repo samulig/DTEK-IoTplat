@@ -39,6 +39,16 @@ app.get('/api/sensors/temperature/:sensorId', async (req, res) => {
   res.json({sensorData})
 })
 
+// Add a new sensor
+app.post('/api/sensors/temperature', async (req, res) => {
+  const sensorData = req.body;
+  await client.connect();
+  const db = client.db('sensors');
+  const collection = db.collection('temp_sensors');
+  const result = await collection.insertOne(sensorData);
+  res.json({ result });
+});
+
 // Just a testing endpoint
 app.get('/api/testing', async (req, res) => {
   res.json({ message: 'Hello from the server!' })
