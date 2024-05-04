@@ -11,11 +11,22 @@ function App() {
   const [sensorIds, setSensorIds] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3100/api/sensors/temperature')
-      .then(response => response.json())
-      .then(data => setSensorIds(data.sensors))
-      .catch(error => console.error('Error:', error));
-  }, [])
+    const fetchSensorIds = () => {
+      fetch('http://localhost:3100/api/sensors/temperature')
+        .then(response => response.json())
+        .then(data => setSensorIds(data.sensors))
+        .catch(error => console.error('Error:', error));
+    };
+  
+    // Fetch sensor IDs immediately
+    fetchSensorIds();
+  
+    // Then fetch sensor IDs every 5 seconds
+    const intervalId = setInterval(fetchSensorIds, 5000);
+  
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <Router>
@@ -28,9 +39,9 @@ function App() {
     <Routes>
     <Route path="/" element ={
         <div className='monitor-grid'>
-            {sensorIds.map(sensorId => (
+            {sensorIds.sort((a, b) => a - b).map(sensorId => (
             <Monitor key={sensorId} sensorId={sensorId} />
-          ))}
+            ))}
         </div>
       }>
         </Route>
