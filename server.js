@@ -2,14 +2,38 @@ import dotenv from 'dotenv'
 import express from 'express'
 import { MongoClient } from 'mongodb'
 import cors from 'cors'
+import mqtt from 'mqtt'
 
 dotenv.config()
 
 const app = express()
+const mqttClient = mqtt.connect(process.env.VITE_MQTT_URL)
 const client = new MongoClient(process.env.VITE_MONGO_URI)
 
 app.use(cors({ origin: '*'}))
 app.use(express.json())
+
+mqttClient.on('connect', () => {
+  mqttClient.subscribe('test', (err) => {
+    if (!err) {
+      console.log('Subscribed to test topic')
+    }
+    if (err) {
+      console.error(err)
+    }
+  })
+});
+
+mqttClient.on('connect', () => {
+  mqttClient.subscribe('temperature', (err) => {
+    if (!err) {
+      console.log('Subscribed to test topic')
+    }
+    if (err) {
+      console.error(err)
+    }
+  })
+});
 
 // List all documents on the temp_sensors collection
 app.get('/api/count', async (req, res) => {
@@ -89,9 +113,38 @@ app.post('/api/sensors/temperature/:sensorId/update', async (req, res) => {
   res.json({ message: 'Document inserted successfully', id: result.insertedId });
 });
 
-// Just a testing endpoint
+// MQTT
+
+mqttClient.on('message', async (topic, message) => {
+  console.log(`Received message on topic ${topic}: ${message.toString()}`)
+  if (topic === 'temperature') {
+    try {
+      await client.connect();
+      const db = client.db('sensors')
+      const collection = db.collection('temp_sensors')
+      const sensorData = JSON.parse(message.toString())
+      sensorData.timestamp = new Date()
+      const sensorExists = await collection.findOne({ 'metadata.sensorId': sensorData.metadata.sensorId });
+      if (!sensorExists) {
+        console.error('Sensor not found');
+        return;
+      }
+      await collection.insertOne(sensorData);
+      console.log('Document inserted successfully');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+});
+
+
+
+// Just some testing endpoints
+// REST
 app.get('/api/testing', async (req, res) => {
   res.json({ message: 'Hello from the server!' })
 })
+
+
 
 app.listen(3100, () => console.log('Server is running on port 3100'))

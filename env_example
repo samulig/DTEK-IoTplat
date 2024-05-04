@@ -2,3 +2,4 @@
 
 VITE_TITLE=Title!
 VITE_MONGO_URI=mongodb://mongo:example@mydb:27017
+VITE_MQTT_URL=mqtt://mqttuser:mqttpass@mymqttbroker:1883
