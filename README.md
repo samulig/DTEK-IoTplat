@@ -77,14 +77,13 @@ services:
     image: eclipse-mosquitto:2.0.18
     container_name: mqtt
     ports:
-      - "1883:1883" #default mqtt port
-      - "9001:9001" #default mqtt port for websockets
+      - "1883:1883" 
+      - "9001:9001" 
     volumes:
       - ./config:/mosquitto/config:rw
       - ./data:/mosquitto/data:rw
       - ./log:/mosquitto/log:rw
 
-# volumes for mapping data,config and log
 volumes:
   config:
   data:
