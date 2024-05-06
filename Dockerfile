@@ -21,6 +21,7 @@ RUN npm run build
 RUN chmod +x server.js
 
 EXPOSE 5000
+EXPOSE 3100
 
 # Specify the command to start your application
 #CMD [ "npm", "run", "serve" ]

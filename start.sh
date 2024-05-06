@@ -1,4 +1,4 @@
 #!/bin/bash
 
 node server.js &
-npm run dev
+npm run dev -- --host
