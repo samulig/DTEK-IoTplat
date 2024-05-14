@@ -4,6 +4,7 @@ import Monitor from './Monitor';
 import Menu from './Menu';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AddSensor from './AddSensor';
+import Apidoc from './apidoc';
 
 const title = import.meta.env.VITE_TITLE;
 
@@ -47,6 +48,8 @@ function App() {
         </Route>
       <Route path="/add-sensor" element={<AddSensor />}>
       </Route>
+      <Route path="/apidoc" element={<Apidoc />}>
+        </Route>
       </Routes>
       </div>
     </div>

@@ -8,9 +8,9 @@ function Menu(props) {
 
   return (
     <div>
-      <Link to="/"><div className='menu-item'>All sensors</div></Link>
-      <Link to="/add-sensor"><div className='menu-item'>Add Sensor</div></Link>
-      <div className='menu-item'>Menu item 1</div>
+      <Link to="/" className='menu-item'><div>All sensors</div></Link>
+      <Link to="/add-sensor" className='menu-item'><div>Add Sensor</div></Link>
+      <Link to="/apidoc" className='menu-item'><div>Apidoc</div></Link>
     </div>
   )
 }
